@@ -11,20 +11,20 @@
     </div>
 
     <div class="banner">
-      <Banner />
+      <BannerStar />
     </div>
   </div>
 </template>
 
 <script>
 import OwnerCard from "./components/OwnerCard.vue";
-import Banner from "./components/Banner.vue";
+import BannerStar from "./components/BannerStar.vue";
 
 export default {
   name: "App",
   components: {
     OwnerCard, 
-    Banner,
+    BannerStar,
   },
   data() {
     return {
