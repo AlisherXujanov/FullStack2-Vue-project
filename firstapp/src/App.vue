@@ -9,16 +9,22 @@
         :owner="user"
       />
     </div>
+
+    <div class="banner">
+      <Banner />
+    </div>
   </div>
 </template>
 
 <script>
 import OwnerCard from "./components/OwnerCard.vue";
+import Banner from "./components/Banner.vue";
 
 export default {
   name: "App",
   components: {
-    OwnerCard,
+    OwnerCard, 
+    Banner,
   },
   data() {
     return {
@@ -62,5 +68,6 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
+  margin-bottom: 100px;
 }
 </style>
