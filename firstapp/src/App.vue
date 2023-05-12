@@ -11,7 +11,7 @@
     </div>
 
     <div class="banner">
-      <BannerStar />
+      <BannerStar title="Акции и бонусы" text="Пополни баланс  сегодня и полчи +200 BS в качестве бонуса" />
     </div>
   </div>
 </template>
@@ -38,8 +38,18 @@ export default {
       ],
     };
   },
+  watch: {},
   methods: {},
   computed: {},
+  created() {
+    console.log("App created");
+  },
+  beforeMount() {
+    console.log("App beforeMount");
+  },
+  mounted() {
+    console.log("App mounted");
+  }
 };
 </script>
 <style lang="css" scoped>
