@@ -1,20 +1,22 @@
 <template>
   <div>
-    <div class="img">Image</div>
-    <b>{{ title }}</b>
-    <p class="subtitle">{{ subtitle }}</p>
-    <div class="footer">
-      <div class="left">
-        <span class="owner"
-          >🎅
-          <!-- owner.img -->
-        </span>
-        <small>{{ owner.name }}</small>
-        <small>{{ owner.date }}</small>
-      </div>
+    <div class="card">
+      <div class="img">Image</div>
+      <div class="content">
+        <b class="title">{{ title }}</b>
+        <p class="subtitle">{{ subtitle }}</p>
+        <div class="footer">
+          <div class="left">
+            <span class="owner-img"
+              >🎅
+              <!-- owner.img -->
+            </span>
+            <small>{{ owner.name }}</small>
+            <small>{{ owner.date }}</small>
+          </div>
 
-      <div class="right">
-        <p>👁 {{ owner.views }}</p>
+          <div class="right">👁 {{ owner.views }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -48,5 +50,47 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css" scoped>
+.card {
+  background-color: lightgray;
+  text-align: left;
+}
+.img {
+  width: 100%;
+  height: 250px;
+  background-color: gray;
+}
+.content {
+  padding: 10px;
+}
+.title {
+  font-size: 1.3em;
+}
+.subtitle {
+  font-size: 0.8em;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  font-size: 0.8em;
+  gap: 3px;
+}
+
+.footer > div {
+  display: flex;
+  flex-flow: wrap row;
+}
+.footer .left {
+  display: flex;
+}
+.footer .left small {
+  margin-left: 5px;
+}
+.footer .rightl {
+  font-size: 1.5em;
+}
+.footer .left .owner-img {
+  font-size: 1.2em;
+}
 </style>
