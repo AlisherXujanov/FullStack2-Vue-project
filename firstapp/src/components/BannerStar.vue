@@ -4,8 +4,8 @@
       <img
         src="../assets/icons/star.png"
         alt="Star image"
-        width="200px"
-        height="200px"
+        width="200"
+        height="200"
       />
     </div>
     <div class="right">
@@ -31,15 +31,15 @@ export default {
 
 .banner-main {
   width: 85%;
-  height: 450px;
+  height: 350px;
   margin: 0 auto;
   background: linear-gradient(to right top, #4b1613, $yellow);
   border-radius: 25px;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: snow;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 100px;
+  padding: 80px;
   font-family: "Roboto", sans-serif;
 
   .right {
@@ -52,17 +52,35 @@ export default {
 
   button {
     border: snow solid 3px;
-    padding: 15px 35px;
+    padding: 10px 20px;
     color: snow;
     background-color: rgb($yellow, 0.1);
     font-size: 1em;
   }
+
+  h2 {
+    margin: 10px 0;
+  }
+  h4 {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
 }
-h2 {
-  margin: 50px 0;
-}
-h4 {
-  font-size: 1.2em;
-  font-weight: 500;
+
+@media (max-width: 768px) {
+  .banner-main {
+    height: auto;
+    grid-template-columns: 1fr;
+    
+    h1 {
+      padding: 300px 0 100px 0;
+    }
+    .card {
+      width: 100%;
+    }
+    img {
+      margin-bottom: 50px;
+    }
+  }
 }
 </style>>

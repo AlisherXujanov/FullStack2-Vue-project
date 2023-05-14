@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="card">
-      <div class="img">Image</div>
+      <div class="img-div">
+        <img :src="getImg" alt="Card image" />
+      </div>
       <div class="content">
         <b class="title">{{ title }}</b>
         <p class="subtitle">{{ subtitle }}</p>
@@ -26,6 +28,10 @@
 export default {
   name: "OwnerCard",
   props: {
+    imgIndex: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       required: false,
@@ -46,51 +52,54 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  computed: {
+    getImg() {
+        return require(`../assets/imgs/grid${this.imgIndex}.png`)
+    }
+  },
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+
+.img-div {
+  width: 100%;
+  height: 150px;
+  background-color: gray;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
 .card {
   background-color: lightgray;
   text-align: left;
-}
-.img {
-  width: 100%;
-  height: 250px;
-  background-color: gray;
-}
-.content {
-  padding: 10px;
-}
-.title {
-  font-size: 1.3em;
-}
-.subtitle {
-  font-size: 0.8em;
-}
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  font-size: 0.8em;
-  gap: 3px;
-}
 
-.footer > div {
-  display: flex;
-  flex-flow: wrap row;
-}
-.footer .left {
-  display: flex;
-}
-.footer .left small {
-  margin-left: 5px;
-}
-.footer .rightl {
-  font-size: 1.5em;
-}
-.footer .left .owner-img {
-  font-size: 1.2em;
+  .content {padding: 10px;}
+
+  .title {font-size: 1.3em;}
+
+  .subtitle {font-size: 0.8em;}
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    font-size: 0.8em;
+    gap: 3px;
+
+    div {
+      display: flex;
+      flex-flow: wrap row;
+    }
+
+    .left small {margin-left: 5px;}
+
+    .right {font-size: 1.5em;}
+
+    .left .owner-img {font-size: 1.2em;}
+  }
 }
 </style>

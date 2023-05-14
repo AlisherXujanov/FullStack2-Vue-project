@@ -4,6 +4,7 @@
     <div class="cards">
       <OwnerCard
         v-for="(user, index) in users"
+        :img-index="index + 1"
         :key="user.name"
         :title="'This is ' + (parseInt(index) + 1) + ' title'"
         :owner="user"
@@ -11,7 +12,10 @@
     </div>
 
     <div class="banner">
-      <BannerStar title="Акции и бонусы" text="Пополни баланс  сегодня и полчи +200 BS в качестве бонуса" />
+      <BannerStar
+        title="Акции и бонусы"
+        text="Пополни баланс  сегодня и полчи +200 BS в качестве бонуса"
+      />
     </div>
   </div>
 </template>
@@ -23,7 +27,7 @@ import BannerStar from "./components/BannerStar.vue";
 export default {
   name: "App",
   components: {
-    OwnerCard, 
+    OwnerCard,
     BannerStar,
   },
   data() {
@@ -49,35 +53,44 @@ export default {
   },
   mounted() {
     console.log("App mounted");
-  }
+  },
 };
 </script>
-<style lang="css" scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
+<style lang="scss" scoped>
 .main {
   text-align: center;
   background: url(assets/bg.png) no-repeat;
   background-size: cover;
   background-position: center;
+  background-origin: center;
+  background-attachment: fixed;
+
+  h1 {
+    padding: 500px 0 100px 0;
+    font-size: 3em;
+    color: snow;
+
+    span {
+      color: #fac704;
+    }
+  }
+
+  .cards {
+    width: 85%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 100px;
+  }
 }
-h1 {
-  padding: 500px 0 100px 0;
-  font-size: 3em;
-  color: snow;
-}
-h1 span {
-  color: #fac704;
-}
-.cards {
-  width: 85%;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  margin-bottom: 100px;
+
+@media (max-width: 768px) {
+  .main {
+    .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 }
 </style>
