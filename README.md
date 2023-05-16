@@ -1,9 +1,11 @@
 # FullStack2 Vue-project
 
 1. git clone "https..."
-2. cd   firstapp
+2. cd  firstapp
 3. npm install
-4. npm run serve
+4. npm run format
+4. npm run dev
+  
 
 ## Installing SASS
 1. npm install -D sass-loader@^10 sass 
