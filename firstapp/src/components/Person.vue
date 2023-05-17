@@ -19,19 +19,13 @@
 export default {
     name: 'Person',
     props: {
-        // person: {
-        //     type: Object,
-        //     required: true
-        // }
+        person: {
+            type: Object,
+            required: true
+        }
     },
     data() {
         return {
-            person: {
-                name: 'John Doe',
-                age: 30,
-                info: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-                number: '555-555-5555'
-            }
         }
     }
 }
