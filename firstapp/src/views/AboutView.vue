@@ -1,6 +1,15 @@
+<script setup>
+
+import Person from '../components/Person.vue'
+
+</script>
+
+
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+   
+    <Person />
+
   </div>
 </template>
 
