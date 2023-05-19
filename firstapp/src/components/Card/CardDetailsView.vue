@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 
 .card-details {
   text-align: center;
@@ -34,6 +34,10 @@ export default {
   border-radius: 5px;
   color: snow;
   background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+
+  h1 {
+    color: red;
+  }
 }
 
 </style>

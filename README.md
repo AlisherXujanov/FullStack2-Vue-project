@@ -18,3 +18,20 @@
         }
     };
     **Use this inside vue.config.js file**
+
+<!-- 
+FOR vite.config.js
+
+    export default defineConfig({
+        ...
+            css: {
+                preprocessorOptions: {
+                scss: {
+                    additionalData: `
+                    @import "./src/styles/_variables.scss";
+                    `
+                }
+            }
+        }
+    }) 
+-->
