@@ -4,6 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
+    <notifications position="top center"  />
     <div class="wrapper">
       <nav>
         <div class="left">

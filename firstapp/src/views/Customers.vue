@@ -25,6 +25,18 @@ export default {
         {name: 'John5', age: 22, number: '90 123 4567', info: "Lorem ipsum dolor sit amet..."},
       ]
     }
+  },
+  created() {
+    // redirect to login page if user is not authenticated
+    // check using local storage
+    if (!localStorage.getItem('user')) {
+      this.redirect()
+    }
+  },
+  methods: {
+    redirect() {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
