@@ -71,3 +71,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@media (max-width: 768px) {
+  * {
+    font-size: 10px;
+  }
+  button,
+  input,
+  a {
+    padding: 5px 10px;
+    display: inline;
+    width: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5rem;
+  }
+  form {
+    width: 100%;
+    margin-top: 20%;
+  }
+}
