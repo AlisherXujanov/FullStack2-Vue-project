@@ -2,8 +2,8 @@
   <div class="login-form">
     <h1>Вход</h1>
     <form class="form-group">
-      <input type="text" placeholder="Логин" />
-      <input type="password" placeholder="Пароль" />
+      <input type="text" placeholder="Логин" v-model="username" />
+      <input type="password" placeholder="Пароль" v-model="password" />
       <button class="войти" :onclick="(e) => login(e)">Войти</button>
     </form>
   </div>
@@ -12,13 +12,36 @@
 export default {
   data() {
     return {
-      msg: 'Hello from Login view'
+      username: '',
+      password: ''
+    }
+  },
+  created() {
+    if (localStorage.getItem('user')) {
+      this.$router.push('/')
     }
   },
   methods: {
     login(e) {
       e.preventDefault()
-      console.log('Login')
+      let loginCredentials = JSON.parse(localStorage.getItem('login-credentials'))
+      if (this.username == loginCredentials.username && this.password == loginCredentials.password) {
+        localStorage.setItem('user', JSON.stringify(loginCredentials))
+        this.$notify({
+          title: "Успешный вход!",
+          text: "Вы успешно вошли в систему.",
+          type: 'success',
+        });
+        this.$router
+          .push('/')
+          .then(() => { this.$router.go() })
+      } else {
+        this.$notify({
+          title: "Неверный логин или пароль!",
+          text: "Пожалуйста, введите правильный логин и пароль.",
+          type: 'error',
+        });
+      }
     }
   }
 }

@@ -1,5 +1,11 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+
+const user = JSON.parse(localStorage.getItem('user'))
+function logout(){
+  localStorage.removeItem('user')
+  window.location.reload()
+}
+
 </script>
 
 <template>
@@ -14,8 +20,13 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink to="/customers">Customers</RouterLink>
         </div>
         <div class="right">
-          <RouterLink to="/login">Login</RouterLink>
-          <RouterLink to="/register">Register</RouterLink>
+          <div v-if="user">
+            <a class="logout" @click="logout">Logout</a>
+          </div>
+          <div v-else>
+            <RouterLink to="/login">Login</RouterLink>
+            <RouterLink to="/register">Register</RouterLink>
+          </div>
         </div>
       </nav>
     </div>
@@ -44,6 +55,7 @@ nav {
     padding: 10px 20px;
     font-family: sans-serif;
     display: inline-block;
+    cursor: pointer;
 
     &:hover {
       background-color: #4caf50;

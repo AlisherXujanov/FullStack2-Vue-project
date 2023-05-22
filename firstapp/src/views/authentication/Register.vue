@@ -44,6 +44,11 @@ export default {
       password2: ''
     }
   },
+  created() {
+    if (localStorage.getItem('user')) {
+      this.$router.push('/')
+    }
+  },
   methods: {
     register(e) {
       e.preventDefault()
@@ -61,13 +66,16 @@ export default {
         password: this.password
       }
       localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('login-credentials', JSON.stringify(user))
       // -----------------------------------------------
       this.clearForm()
       this.$notify({
         title: 'Регистрация прошла успешно',
         type: 'success'
       })
-      this.$router.push('/')
+      this.$router
+        .push('/')
+        .then(() => { this.$router.go() })
     },
     isValid() {
       if (this.username.length < 2) {

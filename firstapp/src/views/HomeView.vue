@@ -7,9 +7,7 @@
 
 <script>
 export default {
-  created() {
-    // redirect to login page if user is not authenticated
-    // check using local storage
+  mounted() {
     if (!localStorage.getItem('user')) {
       this.errorNotification()
       this.redirect()
@@ -17,7 +15,8 @@ export default {
   },
   methods: {
     redirect() {
-      this.$router.push('/login')
+      this.$router
+        .push('/login')
     },
     errorNotification() {
       this.$notify({

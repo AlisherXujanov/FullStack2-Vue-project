@@ -27,9 +27,12 @@ export default {
     }
   },
   created() {
-    // redirect to login page if user is not authenticated
-    // check using local storage
     if (!localStorage.getItem('user')) {
+      this.$notify({
+        title: "You are not logged in!",
+        text: "Please login to access the content.",
+        type: 'error',
+      });
       this.redirect()
     }
   },
