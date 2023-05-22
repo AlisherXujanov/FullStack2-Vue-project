@@ -3,24 +3,29 @@
     <h1>Регистрация</h1>
     <form class="form-group">
       <div>
-        <input type="text" id="name-input" placeholder="Введите никнейм" />
+        <input type="text" id="name-input" v-model="username" placeholder="Введите никнейм" />
         <input
-          type="text"
-          id="name-input"
+          type="email"
+          id="email-input"
+          v-model="email"
           placeholder="Электронная почта"
           pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
         />
       </div>
       <div>
         <input
+          type="password"
           id="pass-input"
+          v-model="password"
           placeholder="Придумайте пароль"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
         />
       </div>
       <div>
         <input
-          id="pass-input"
+          type="password"
+          id="pass2-input"
+          v-model="password2"
           placeholder="Повторите пароль"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
         />
@@ -33,13 +38,54 @@
 export default {
   data() {
     return {
-      msg: 'Hello from Register view'
+      username: '',
+      email: '',
+      password: '',
+      password2: ''
     }
   },
   methods: {
     register(e) {
       e.preventDefault()
-      console.log('Registration')
+      if (!this.isValid()) {
+        this.$notify({
+          title: 'Проверьте правильность введенных данных',
+          type: 'error'
+        })
+        return
+      }
+      // We save all information into localStorage
+      let user = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+      localStorage.setItem('user', JSON.stringify(user))
+      // -----------------------------------------------
+      this.clearForm()
+      this.$notify({
+        title: 'Регистрация прошла успешно',
+        type: 'success'
+      })
+      this.$router.push('/')
+    },
+    isValid() {
+      if (this.username.length < 2) {
+        return false
+      }
+      if (this.password.length < 5) {
+        return false
+      }
+      if (this.password !== this.password2) {
+        return false
+      }
+      return true
+    },
+    clearForm() {
+      this.username = ''
+      this.email = ''
+      this.password = ''
+      this.password2 = ''
     }
   }
 }
