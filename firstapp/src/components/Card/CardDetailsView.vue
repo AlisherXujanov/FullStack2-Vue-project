@@ -1,7 +1,11 @@
 <template>
-  <div class="card-details">
+  <div class="card-details">  
+    <img :src="getImg">
     <h1>{{ card.title }}</h1>
     <p> {{ card.content }} </p>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores, aut error quam minima ipsum consequatur accusantium numquam hic? Assumenda magni adipisci debitis libero, quo culpa! Sunt at voluptatem odit dicta, est ducimus esse architecto doloribus adipisci fugiat, perspiciatis dolores eaque quam, vero ullam a quod hic repudiandae! Asperiores consectetur veniam quos voluptates. Totam soluta eos dolorum quidem inventore est iste asperiores possimus perferendis ducimus ullam odit ratione excepturi similique enim, necessitatibus, veniam nihil aliquam sed, dolor accusamus repudiandae expedita unde. Placeat exercitationem eveniet optio eum sit accusantium cupiditate id tempora ad, magni autem non corrupti ullam, quo iure vitae enim?
+    </p>
   </div>
 </template>
 
@@ -9,18 +13,27 @@
 export default {
   data() {
     return {
+      currentCardId: Number(this.$route.params.code),
       cards: [
         { id: 1, title: 'Card 1', content: 'Lorem ipsum dolor sit amet...' },
         { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...' },
         { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...' },
         { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...' }
+        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...' },
+        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...' }
       ]
     }
   },
   computed: {
     card() {
-      return this.cards.filter((c) => c.id === Number(this.$route.params.code))[0]
+      return this.cards.filter((c) => c.id === this.currentCardId)[0]
+    },
+    getImg() {
+      // This is vite configuration to get the image path
+      // in Vue we could use require.context
+      // but in vite we can't use it
+      // so we use this method to get the image path
+      return new URL(`../../assets/card_images/img${this.currentCardId}.jpg`, import.meta.url).href
     }
   }
 }
@@ -37,6 +50,10 @@ export default {
 
   h1 {
     color: red;
+  }
+  img {
+    width: 100%;
+    height: 400px;
   }
 }
 

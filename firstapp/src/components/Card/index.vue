@@ -1,11 +1,10 @@
 <template>
   <div class="card">
+    <img :src="getImg" />
     <h3>{{ card.title }}</h3>
     <p>{{ card.content }}</p>
     <footer class="card-footer">
-      <router-link :to="{ path: `/card/${card.id}` }" class="btn primary">
-        View
-      </router-link>
+      <router-link :to="{ path: `/card/${card.id}` }" class="btn primary"> View </router-link>
       <router-link to="" class="btn danger">Delete</router-link>
     </footer>
   </div>
@@ -18,13 +17,29 @@ export default {
     card: {
       type: Object,
       required: true
+    },
+    imgId: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    getImg() {
+      // This is vite configuration to get the image path
+      // in Vue we could use require.context
+      // but in vite we can't use it
+      // so we use this method to get the image path
+      return new URL(`../../assets/card_images/img${this.imgId}.jpg`, import.meta.url).href
     }
   }
 }
 </script>
 
 <style scoped>
-* { transition: 0.3s; box-sizing: border-box; }
+* {
+  transition: 0.3s;
+  box-sizing: border-box;
+}
 .card {
   background-color: #fff;
   border-radius: 5px;
@@ -40,6 +55,10 @@ export default {
 
 .card p {
   margin-bottom: 0.5rem;
+}
+img {
+  width: 100%;
+  height: 150px;
 }
 
 @media (min-width: 700px) {

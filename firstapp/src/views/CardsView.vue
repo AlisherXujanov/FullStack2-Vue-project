@@ -1,6 +1,11 @@
 <template>
   <div class="cards">
-    <Card v-for="card in cards" :key="card.id" :card="card" />
+    <Card 
+      v-for="card in cards" 
+      :key="card.id" 
+      :card="card" 
+      :imgId="card.id"
+    />
   </div>
 </template>
 
@@ -18,7 +23,8 @@ export default {
         { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...' },
         { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...' },
         { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...' }
+        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...' },
+        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...' },
       ]
     }
   },
