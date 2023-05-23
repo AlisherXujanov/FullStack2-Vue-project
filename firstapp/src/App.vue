@@ -1,16 +1,25 @@
 <script setup>
-
+import { notify } from "@kyvg/vue3-notification";
+import router from './router'
 const user = JSON.parse(localStorage.getItem('user'))
-function logout(){
-  localStorage.removeItem('user')
-  window.location.reload()
-}
 
+
+function logout() {
+  localStorage.removeItem('user')
+  notify({
+    title: 'Logout Success',
+    text: 'You have been logged out successfully.',
+    type: 'success'
+  })
+  router.push('/login').then(() => {
+    location.reload()
+  })
+}
 </script>
 
 <template>
   <header>
-    <notifications position="top center"  />
+    <notifications position="top center" />
     <div class="wrapper">
       <nav>
         <div class="left">
