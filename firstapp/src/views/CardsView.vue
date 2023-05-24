@@ -1,15 +1,27 @@
 <template>
-  <div class="cards">
-    <Card 
-      v-for="card in cards" 
-      :key="card.id" 
-      :card="card" 
-      :imgId="card.id"
-      @toggle-favorite="toggleFavorite"
-      v-slot:default
-    >
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, sit eaque quod voluptate ipsam adipisci et minus deserunt sequi reprehenderit neque quisquam corrupti laudantium corporis rem fuga beatae magnam ad.</p>
-    </Card>
+  <div>
+    <div class="filter-section">
+      <button @click="filterBy('by__date')" :class="filter.by__date ? 'active' : ''">By Date</button>
+      <button @click="filterBy('by__favorite')" :class="filter.by__favorite ? 'active' : ''">By Favorite</button>
+      <button @click="filterBy('default')" :class="filter.default ? 'active' : ''">All Cards</button>
+    </div>
+
+    <div class="cards">
+      <Card
+        v-for="card in filteredCards"
+        :key="card.id"
+        :card="card"
+        :imgId="card.id"
+        @toggle-favorite="toggleFavorite"
+        v-slot:default
+      >
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, sit eaque quod voluptate
+          ipsam adipisci et minus deserunt sequi reprehenderit neque quisquam corrupti laudantium
+          corporis rem fuga beatae magnam ad.
+        </p>
+      </Card>
+    </div>
   </div>
 </template>
 
@@ -23,13 +35,74 @@ export default {
   data() {
     return {
       cards: [
-        { id: 1, title: 'Card 1', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-      ]
+        {
+          id: 1,
+          title: 'Card 1',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-20'
+        },
+        {
+          id: 2,
+          title: 'Card 2',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-19'
+        },
+        {
+          id: 3,
+          title: 'Card 3',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-18'
+        },
+        {
+          id: 4,
+          title: 'Card 4',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-17'
+        },
+        {
+          id: 5,
+          title: 'Card 5',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-16'
+        },
+        {
+          id: 6,
+          title: 'Card 6',
+          content: 'Lorem ipsum dolor sit amet...',
+          favorite: false,
+          date: '2022-10-15'
+        }
+      ],
+      filter: {
+        by__date: false,
+        by__favorite: false,
+        default: true,
+      }
+    }
+  },
+  computed: {
+    filteredCards() {
+      // by date
+      if (this.filter.by__date) {
+        return this.cards.sort((a, b) => {
+          return new Date(a.date) - new Date(b.date)
+        })
+      }
+      // by favorite
+      else if (this.filter.by__favorite) {
+        return this.cards.filter((card) => card.favorite)
+      }
+      // default
+      else {
+        return this.cards.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date)
+        })
+      }
     }
   },
   created() {
@@ -49,18 +122,58 @@ export default {
       this.$router.push('/login')
     },
     toggleFavorite(card_id) {
-      const card = this.cards.find(card => card.id === card_id)
+      const card = this.cards.find((card) => card.id === card_id)
       card.favorite = !card.favorite
+    },
+    filterBy(order) {
+      for (const key in this.filter) {
+        this.filter[key] = false
+      }
+      this.filter[order] = true
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: end;
+  margin: 20px 0;
+
+  button {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: snow;
+    transition: 0.3s;
+    margin-left: 5px;
+
+    &:hover {
+      /* bootstrap success color */
+      background-color: #28a745;
+      border: 1px solid #28a745;
+      outline: 5px solid rgb(0, 120, 0, 0.5);
+    }
+    &.active {
+      background-color: #28a745;
+    }
+    &:active {
+      background-color: #aaa;
+    }
+  }
+
+  
 }
 
 @media (max-width: 700px) {
