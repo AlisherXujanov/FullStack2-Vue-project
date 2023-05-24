@@ -6,6 +6,11 @@
     <img :src="getImg" />
     <h3>{{ card.title }}</h3>
     <p>{{ card.content }}</p>
+
+    <slot>
+      <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.</p>
+    </slot>
+
     <footer class="card-footer">
       <button class="thumb-up" style="float: left;" @click="$emit('toggle-favorite', card.id)">
         👍🏻
@@ -19,6 +24,7 @@
 <script>
 export default {
   name: 'Card',
+  emits: ['toggle-favorite'],
   props: {
     card: {
       type: Object,

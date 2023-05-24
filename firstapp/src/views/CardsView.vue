@@ -6,7 +6,10 @@
       :card="card" 
       :imgId="card.id"
       @toggle-favorite="toggleFavorite"
-    />
+      v-slot:default
+    >
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde, sit eaque quod voluptate ipsam adipisci et minus deserunt sequi reprehenderit neque quisquam corrupti laudantium corporis rem fuga beatae magnam ad.</p>
+    </Card>
   </div>
 </template>
 
