@@ -30,7 +30,7 @@
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
         />
       </div>
-      <button class="войти" :onclick="(e) => register(e)">Создать аккаунт</button>
+      <button class="войти" @click="(e) => register(e)">Создать аккаунт</button>
     </form>
   </div>
 </template>

@@ -4,7 +4,7 @@
     <form class="form-group">
       <input type="text" placeholder="Логин" v-model="username" />
       <input type="password" placeholder="Пароль" v-model="password" />
-      <button class="войти" :onclick="(e) => login(e)">Войти</button>
+      <button class="войти" @click="(e) => login(e)">Войти</button>
     </form>
   </div>
 </template>
