@@ -1,9 +1,15 @@
 <template>
   <div class="card">
+    <span class="favorite" v-if="card.favorite">
+      ♥
+    </span>
     <img :src="getImg" />
     <h3>{{ card.title }}</h3>
     <p>{{ card.content }}</p>
     <footer class="card-footer">
+      <button class="thumb-up" style="float: left;" @click="$emit('toggle-favorite', card.id)">
+        👍🏻
+      </button>
       <router-link :to="{ path: `/card/${card.id}` }" class="btn primary"> View </router-link>
       <router-link to="" class="btn danger">Delete</router-link>
     </footer>
@@ -47,6 +53,7 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: #222;
   width: 100%;
+  position: relative;
 }
 
 .card h3 {
@@ -60,6 +67,29 @@ img {
   width: 100%;
   height: 150px;
 }
+.favorite {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  font-size: 3rem;
+  text-shadow: 2px 2px 10px red, -2px -2px 10px red;
+  color: red;
+}
+.thumb-up {
+  border: none;
+  outline: none;
+  padding: 2px;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.thumb-up:hover { background-color: lightgray; }
+.thumb-up:active { background-color: green; }
+
 
 @media (min-width: 700px) {
   .card {

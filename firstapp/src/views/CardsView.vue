@@ -5,6 +5,7 @@
       :key="card.id" 
       :card="card" 
       :imgId="card.id"
+      @toggle-favorite="toggleFavorite"
     />
   </div>
 </template>
@@ -19,12 +20,12 @@ export default {
   data() {
     return {
       cards: [
-        { id: 1, title: 'Card 1', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...' },
-        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...' },
+        { id: 1, title: 'Card 1', content: 'Lorem ipsum dolor sit amet...', favorite: false },
+        { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...', favorite: false },
+        { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...', favorite: false },
+        { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...', favorite: false },
+        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...', favorite: false },
+        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...', favorite: false },
       ]
     }
   },
@@ -43,6 +44,10 @@ export default {
   methods: {
     redirect() {
       this.$router.push('/login')
+    },
+    toggleFavorite(card_id) {
+      const card = this.cards.find(card => card.id === card_id)
+      card.favorite = !card.favorite
     }
   }
 }
