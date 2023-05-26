@@ -20,7 +20,7 @@
         👍🏻
       </button>
       <router-link :to="{ path: `/card/${card.id}` }" class="btn primary"> View </router-link>
-      <router-link to="" class="btn danger">Delete</router-link>
+      <router-link to="" class="btn danger" @click="$emit('delete', card.id)">Delete</router-link>
     </footer>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script>
 export default {
   name: 'Card',
-  emits: ['toggle-favorite'],
+  emits: ['toggle-favorite', 'delete'],
   props: {
     card: {
       type: Object,

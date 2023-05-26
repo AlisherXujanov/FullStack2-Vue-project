@@ -33,6 +33,7 @@
             :card="card"
             :imgId="card.id"
             @toggle-favorite="toggleFavorite"
+            @delete="deleteCard"
             v-slot:default
           >
             <p>
@@ -182,6 +183,23 @@ export default {
         })
         this.cards.push(card)
         this.toggleSection('cards')
+      }
+    },
+    deleteCard(card__id) {
+      let card = this.cards.find(card => card.id === card__id)
+      if (confirm(`Are you sure to delete ${card.title}`)) {
+        this.cards = this.cards.filter(card =>  card.id  !==  card__id)
+        this.$notify({
+          title: 'Deleted',
+          text: 'Card has been deleted successfully.',
+          type: 'success'
+        })
+      } else {
+        this.$notify({
+          title: 'Cancelled',
+          text: 'Card deletion has been cancelled.',
+          type: 'warn'
+        })
       }
     }
   }
