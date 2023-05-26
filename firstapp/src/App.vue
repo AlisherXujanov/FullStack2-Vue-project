@@ -1,8 +1,33 @@
 <script setup>
 import { notify } from "@kyvg/vue3-notification";
 import router from './router'
-const user = JSON.parse(localStorage.getItem('user'))
+import { provide } from 'vue'
 
+
+const user = JSON.parse(localStorage.getItem('user'))
+const people = [
+  { name: 'John', age: 30, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Aragorn', age: 35, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Mathilda', age: 25, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Argus', age: 15, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Phantom', age: 22, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'John 2', age: 30, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Aragorn 2', age: 35, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Mathilda 2', age: 25, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Argus 2', age: 15, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Phantom 2', age: 22, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'John 3', age: 30, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Aragorn 3', age: 35, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Mathilda 3', age: 25, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Argus 3', age: 15, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Phantom 3', age: 22, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'John 4', age: 30, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Aragorn 4', age: 35, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Mathilda 4', age: 25, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Argus 4', age: 15, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+  { name: 'Phantom 4', age: 22, number: '90 123 4567', info: 'Lorem ipsum dolor sit amet...' },
+]
+provide('people', people)
 
 function logout() {
   localStorage.removeItem('user')
