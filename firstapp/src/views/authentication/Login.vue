@@ -25,6 +25,15 @@ export default {
     login(e) {
       e.preventDefault()
       let loginCredentials = JSON.parse(localStorage.getItem('login-credentials'))
+
+      if (!loginCredentials) {
+        this.$notify({
+          title: "Неверный логин или пароль!",
+          text: "Пожалуйста, введите правильный логин и пароль.",
+          type: 'error',
+        });
+      }
+
       if (this.username == loginCredentials.username && this.password == loginCredentials.password) {
         localStorage.setItem('user', JSON.stringify(loginCredentials))
         this.$notify({
