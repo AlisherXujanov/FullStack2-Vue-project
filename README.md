@@ -35,3 +35,25 @@ FOR vite.config.js
         }
     }) 
 -->
+
+## Install vuex
+1. npm install --save vuex@next
+2. Initialize store in main.js
+   ```
+    ...
+    import { createStore } from 'vuex'
+    const store = createStore({
+        state () {
+            return {
+                count: 0
+            }
+        },
+        mutations: {
+            increment (state) {
+                state.count++
+            }
+        }
+    })
+    createApp(App).use(store).mount('#app')
+   ```
+

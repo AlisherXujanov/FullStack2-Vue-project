@@ -1,6 +1,11 @@
 <template>
   <main>
-    <h1>Home Page</h1>
+    <h1>Vuex page</h1>
+    
+    <h3>Counter:  {{ $store.state.counter }}</h3>
+    <button @click='addOne'>
+      Add one
+    </button>
   </main>
 </template>
 
@@ -9,21 +14,18 @@
 export default {
   mounted() {
     if (!localStorage.getItem('user')) {
-      this.errorNotification()
-      this.redirect()
-    }
-  },
-  methods: {
-    redirect() {
-      this.$router
-        .push('/login')
-    },
-    errorNotification() {
       this.$notify({
         title: "You are not logged in!",
         text: "Please login to access the content.",
         type: 'error',
       });
+      this.$router.push('/login')
+    }
+  },
+  methods: {
+    addOne() {
+      // this.$store.state.counter++
+      this.$store.commit('increment')
     }
   }
 }
