@@ -75,6 +75,10 @@ const store = createStore({
             state.counter++
             // in the component we call it like:
             // this.$store.commit('increment')
+        },
+        toggleFavoriteCard(state, { card_id }) {
+            const card = state.cards.find((card) => card.id === card_id)
+            card.favorite = !card.favorite
         }
     },
     actions: {

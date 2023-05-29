@@ -47,10 +47,14 @@ export default {
     }
   },
   methods: {
+    // toggleFavorite(card_id) {
+    //   const card = this.cards.find(card => card.id === card_id)
+    //   card.favorite = !card.favorite
+    // }
     toggleFavorite(card_id) {
-      const card = this.cards.find(card => card.id === card_id)
-      card.favorite = !card.favorite
-    }
+      const payload = { card_id }
+      this.$store.commit('toggleFavoriteCard', payload)
+    },
   }
 }
 </script>
