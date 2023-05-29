@@ -59,50 +59,7 @@ export default {
   },
   data() {
     return {
-      cards: [
-        {
-          id: 1,
-          title: 'Card 1',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-20'
-        },
-        {
-          id: 2,
-          title: 'Card 2',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-19'
-        },
-        {
-          id: 3,
-          title: 'Card 3',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-18'
-        },
-        {
-          id: 4,
-          title: 'Card 4',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-17'
-        },
-        {
-          id: 5,
-          title: 'Card 5',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-16'
-        },
-        {
-          id: 6,
-          title: 'Card 6',
-          content: 'Lorem ipsum dolor sit amet...',
-          favorite: false,
-          date: '2022-10-15'
-        }
-      ],
+      cards: [],
       filter: {
         by__date: false,
         by__favorite: false,
@@ -145,6 +102,10 @@ export default {
       })
       this.redirect()
     }
+  },
+  mounted() {
+    // we get the information from the state
+    this.cards = this.$store.state.cards
   },
   methods: {
     redirect() {

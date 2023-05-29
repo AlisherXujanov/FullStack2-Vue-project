@@ -1,5 +1,5 @@
 <template>
-  <div class="card-details">
+  <div v-if="loaded" class="card-details">
     <img :src="getImg" />
     <span v-if="card.favorite" class="favorite" > ♥ </span>
     <h1>{{ card.title }}</h1>
@@ -25,15 +25,14 @@ export default {
   data() {
     return {
       currentCardId: Number(this.$route.params.code),
-      cards: [
-        { id: 1, title: 'Card 1', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 2, title: 'Card 2', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 3, title: 'Card 3', content: 'Lorem ipsum dolor sit amet...', favorite: true },
-        { id: 4, title: 'Card 4', content: 'Lorem ipsum dolor sit amet...', favorite: false },
-        { id: 5, title: 'Card 5', content: 'Lorem ipsum dolor sit amet...', favorite: true },
-        { id: 6, title: 'Card 6', content: 'Lorem ipsum dolor sit amet...', favorite: false }
-      ]
+      loaded: false,
+      cards: []
     }
+  },
+  mounted() {
+    // we get the information from the state
+    this.cards = this.$store.state.cards
+    this.loaded = true
   },
   computed: {
     card() {

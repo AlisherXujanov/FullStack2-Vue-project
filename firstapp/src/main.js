@@ -12,7 +12,51 @@ const store = createStore({
     state() {
         // is the same as data in a component
         return {
-            counter: 0
+            cards: [
+                {
+                    id: 1,
+                    title: 'Card 1',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-20'
+                },
+                {
+                    id: 2,
+                    title: 'Card 2',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-19'
+                },
+                {
+                    id: 3,
+                    title: 'Card 3',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-18'
+                },
+                {
+                    id: 4,
+                    title: 'Card 4',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-17'
+                },
+                {
+                    id: 5,
+                    title: 'Card 5',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-16'
+                },
+                {
+                    id: 6,
+                    title: 'Card 6',
+                    content: 'Lorem ipsum dolor sit amet...',
+                    favorite: false,
+                    date: '2022-10-15'
+                }
+            ],
+            counter: 0,
             // in the component we call it like:
             // {{ $store.state.counter }}
         }
