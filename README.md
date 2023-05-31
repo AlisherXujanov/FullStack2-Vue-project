@@ -57,3 +57,16 @@ FOR vite.config.js
     createApp(App).use(store).mount('#app')
    ```
 
+## INSTALLING json-server
+This is needed to create a fake backend for our app
+
+1. *npm install json-server -g*
+2. create a **db.json** file    &&   some data to it
+3. *json-server db.json*  
+4. *json-server --watch db.json*  => to watch for changes
+
+<!-- 
+Set-ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -Scope CurrentUser   
+    =>  Unrestricted
+ -->
