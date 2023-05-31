@@ -10,7 +10,7 @@
     <div class="content">
       <section v-if="section.addCard">
         <div>
-          <AddCard @submit="addCard" :new-card-id="cards.length + 1" />
+          <AddCard @toggleSection='toggleSection' :new-card-id="cards.length + 1" />
         </div>
       </section>
       <section v-else>
@@ -51,6 +51,7 @@
 <script>
 import Card from '../components/Card/index.vue'
 import AddCard from '../components/Card/AddCard.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -68,26 +69,29 @@ export default {
       section: {
         addCard: false,
         cards: true
-      }
+      },
+      loaded: false
     }
   },
   computed: {
     filteredCards() {
-      // by date
-      if (this.filter.by__date) {
-        return this.cards.sort((a, b) => {
-          return new Date(a.date) - new Date(b.date)
-        })
-      }
-      // by favorite
-      else if (this.filter.by__favorite) {
-        return this.cards.filter((card) => card.favorite)
-      }
-      // default
-      else {
-        return this.cards.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date)
-        })
+      if (this.loaded) {
+        // by date
+        if (this.filter.by__date) {
+          return this.cards.sort((a, b) => {
+            return new Date(a.date) - new Date(b.date)
+          })
+        }
+        // by favorite
+        else if (this.filter.by__favorite) {
+          return this.cards.filter((card) => card.favorite)
+        }
+        // default
+        else {
+          return this.cards.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date)
+          })
+        }
       }
     }
   },
@@ -103,9 +107,12 @@ export default {
       this.redirect()
     }
   },
-  mounted() {
+  async mounted() {
     // we get the information from the state
-    this.cards = this.$store.state.cards
+
+    // this.cards = this.$store.state.cards
+
+    await this.getCards()
   },
   methods: {
     redirect() {
@@ -127,29 +134,10 @@ export default {
       }
       this.section[section] = true
     },
-    addCard(card) {
-      if (!card) return
-      if (!card.title || !card.content || !card.date) {
-        this.$notify({
-          title: 'Error',
-          text: 'Please fill all the fields.',
-          type: 'error'
-        })
-        return
-      } else {
-        this.$notify({
-          title: `Created - ${card.title} - card`,
-          text: 'Card has been added successfully.',
-          type: 'success'
-        })
-        this.cards.push(card)
-        this.toggleSection('cards')
-      }
-    },
     deleteCard(card__id) {
-      let card = this.cards.find(card => card.id === card__id)
+      let card = this.cards.find((card) => card.id === card__id)
       if (confirm(`Are you sure to delete ${card.title}`)) {
-        this.cards = this.cards.filter(card =>  card.id  !==  card__id)
+        this.cards = this.cards.filter((card) => card.id !== card__id)
         this.$notify({
           title: 'Deleted',
           text: 'Card has been deleted successfully.',
@@ -161,6 +149,13 @@ export default {
           text: 'Card deletion has been cancelled.',
           type: 'warn'
         })
+      }
+    },
+    async getCards() {
+      const url = 'http://localhost:3000/cards'
+      this.cards = await axios.get(url).then((res) => res.data)
+      if (this.cards.length > 0) {
+        this.loaded = true
       }
     }
   }

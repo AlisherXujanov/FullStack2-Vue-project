@@ -22,7 +22,11 @@
     </form>
   </div>
 </template>
+
+
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     newCardId: {
@@ -40,14 +44,29 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit('submit', {
-        // id: this.newCardId,
-        id: 5,  // WE ARE HARDCODING THE ID TO 5 for pictures
+      if (!card) return
+      const url = 'http://localhost:3000/cards'
+      const card = {
         title: this.title,
         content: this.content,
         favorite: this.favorite,
         date: this.date
-      })
+      }
+      let response = axios.post(url, card)
+      if (response.status == 201) {
+        this.$notify({
+          title: 'Error',
+          text: 'Please fill all the fields.',
+          type: 'error'
+        })
+      } else {
+        this.$notify({
+          title: `Created - ${card.title} - card`,
+          text: 'Card has been added successfully.',
+          type: 'success'
+        })
+      }
+      this.$emit('toggleSection', 'cards')
     }
   }
 }
@@ -59,13 +78,15 @@ export default {
   margin: 0 auto;
   display: flex;
 
-  h1 { font-size: 3em; }
+  h1 {
+    font-size: 3em;
+  }
 
   form {
     width: 100%;
 
-
-    input:not([type='checkbox']), textarea {
+    input:not([type='checkbox']),
+    textarea {
       width: 50%;
       padding: 10px 20px;
       display: block;
@@ -75,9 +96,15 @@ export default {
       transition: 0.3s;
       font-size: 1.2em;
 
-      &:focus:not([type='checkbox']) { outline: 5px solid rgb(0, 255, 255, 0.5); }
+      &:focus:not([type='checkbox']) {
+        outline: 5px solid rgb(0, 255, 255, 0.5);
+      }
     }
-    input[type='checkbox'] { margin: 20px; width: 20px; height: 20px }
+    input[type='checkbox'] {
+      margin: 20px;
+      width: 20px;
+      height: 20px;
+    }
     label {
       width: 50%;
       margin: 0 auto;
@@ -96,11 +123,13 @@ export default {
       color: #fff;
       cursor: pointer;
 
-      &:hover { 
-        background-color: #218838;  
-        outline: 5px solid rgb(0, 150, 0, 0.5); 
+      &:hover {
+        background-color: #218838;
+        outline: 5px solid rgb(0, 150, 0, 0.5);
       }
-      &:active { background-color: #1e7e34; }
+      &:active {
+        background-color: #1e7e34;
+      }
     }
   }
 }
