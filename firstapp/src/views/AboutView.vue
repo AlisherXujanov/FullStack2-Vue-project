@@ -1,12 +1,25 @@
 <script setup>
+import axios from 'axios'
 import { ref, computed, inject } from 'vue'
 import Person from '../components/Person.vue'
 
 // IMPORTS
 // --------------------------------------------------------------------------------------------
+let loaded = ref(false)
+let people = ref([])
 
+async function getPeople() {
+  const url = "http://localhost:3000/people"
+  return await axios.get(url).then((response) => {
+    return response.data
+  })
+}
+getPeople().then((data) => {
+  people.value = data
+  loaded.value = true
+})
 
-const people = inject('people')
+// const people = inject('people')
 // DATA
 // --------------------------------------------------------------------------------------------
 
@@ -42,7 +55,7 @@ function removePerson() {
 
 </script>
 <template>
-  <div class="about">
+  <div v-if="loaded" class="about">
     <div id="autocomplete">
       <label for="search"> Type the name of a person to search </label>
       <input type="text" id="search" placeholder="Type here..." v-model="searchTerm" />

@@ -59,7 +59,22 @@
   ],
   "people": [
     {
-      "name": "John"
+      "name": "John",
+      "age": 30,
+      "number": "90 123 4567",
+      "info": "Lorem ipsum dolor sit amet..."
+    },
+    {
+      "name": "Aragorn",
+      "age": 35,
+      "number": "90 123 4567",
+      "info": "Lorem ipsum dolor sit amet..."
+    },
+    {
+      "name": "Mathilda",
+      "age": 25,
+      "number": "90 123 4567",
+      "info": "Lorem ipsum dolor sit amet..."
     }
   ]
 }
