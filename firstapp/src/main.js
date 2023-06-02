@@ -2,6 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
+import axios from 'axios'
 import App from './App.vue'
 import router from './router'
 import Notifications from '@kyvg/vue3-notification'
@@ -57,6 +58,7 @@ const store = createStore({
                 }
             ],
             counter: 0,
+            people: [],
             // in the component we call it like:
             // {{ $store.state.counter }}
         }
@@ -67,18 +69,26 @@ const store = createStore({
             return state.counter * state.counter
             // in the component we call it like:
             // {{ $store.getters.counterSquared }}
+        },
+        getPeople(state) {
+            return state.people
         }
     },
     mutations: {
         // is the same as methods in a component
         increment(state) {
-            state.counter++
+            setTimeout(() => {
+                state.counter++
+            }, 1000)
             // in the component we call it like:
             // this.$store.commit('increment')
         },
         toggleFavoriteCard(state, { card_id }) {
             const card = state.cards.find((card) => card.id === card_id)
             card.favorite = !card.favorite
+        },
+        setPeople(state, people) {
+            state.people = people
         }
     },
     actions: {
@@ -90,6 +100,15 @@ const store = createStore({
             context.commit('increment')
             // in the component we call it like:
             // this.$store.dispatch('increment')
+        },
+        async getPeople(context) {
+            const url = "http://localhost:3000/people"
+            const people = await axios.get(url).then((response) => {
+                return response.data
+            })
+            setTimeout(() => {
+                context.commit('setPeople', people)
+            }, 1000)
         }
     }
 })
